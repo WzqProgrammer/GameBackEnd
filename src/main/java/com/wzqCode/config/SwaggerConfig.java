@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * @author 14188
  * @date 2021/10/10 11 :10
- * @description
+ * @description 日志组件swagger的配置类
  */
 @Configuration
 @EnableSwagger2
