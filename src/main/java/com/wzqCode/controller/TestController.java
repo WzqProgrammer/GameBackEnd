@@ -1,5 +1,7 @@
 package com.wzqCode.controller;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.wzqCode.Utils.JwtUtil;
 import com.wzqCode.mapper.AccountMapper;
 import com.wzqCode.obj.db.Account;
 import com.wzqCode.obj.msg.client.CLoginMsg;
@@ -22,18 +24,10 @@ public class TestController {
     @GetMapping("/test")
     @ApiOperation("测试接口")
     public String test(){
-        Account account = accountMapper.selectById(1);
+        Account account = accountMapper.selectById(10);
         String accountName = account.getAccount();
         String ret = "hello test ok" + accountName;
         return ret;
-    }
-
-    @PostMapping("/login")
-    @ApiOperation("登录接口")
-    public Integer login(@RequestBody CLoginMsg cLoginMsg){
-        SLoginMsg sLoginMsg = new SLoginMsg();
-        sLoginMsg.setRet(0);
-        return sLoginMsg.getRet();
     }
 
     @PostMapping("/addAccount")
@@ -59,5 +53,14 @@ public class TestController {
         original.setPassword(account.getPassword());
         accountMapper.updateById(original);
         return ""+original.getId();
+    }
+
+    @GetMapping("/verifyToken")
+    @ApiOperation("测试token的解析")
+    public String verifyToken(String token){
+        DecodedJWT decodedJWT = JwtUtil.verify(token);
+        Integer id = decodedJWT.getClaim("id").asInt();
+        String account = decodedJWT.getClaim("account").asString();
+        return "verify token ok : id = " + id + "  account = "+account;
     }
 }

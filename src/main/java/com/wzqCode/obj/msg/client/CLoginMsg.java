@@ -8,7 +8,7 @@ import lombok.Data;
 @ApiModel("客户端登录消息结构")
 public class CLoginMsg {
     @ApiModelProperty("用户名")
-    private String name;
+    private String account;
     @ApiModelProperty("用户密码")
     private String password;
 }

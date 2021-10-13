@@ -1,9 +1,6 @@
 package com.wzqCode.obj.db;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -24,4 +21,11 @@ public class Account {
     //逻辑删除
     @TableLogic(delval = "1")
     private Integer del;
+
+    //创建时间
+    @TableField(fill = FieldFill.INSERT)
+    private String createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updateTime;
 }
