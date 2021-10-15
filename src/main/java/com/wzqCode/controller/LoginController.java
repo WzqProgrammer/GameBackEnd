@@ -1,8 +1,8 @@
 package com.wzqCode.controller;
 
-import com.wzqCode.obj.msg.client.CLoginMsg;
-import com.wzqCode.obj.msg.client.CRegMsg;
-import com.wzqCode.obj.msg.server.SReturnMsg;
+import com.wzqCode.obj.msg.client.login.CLoginMsg;
+import com.wzqCode.obj.msg.client.login.CRegMsg;
+import com.wzqCode.obj.msg.server.login.SReturnMsg;
 import com.wzqCode.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

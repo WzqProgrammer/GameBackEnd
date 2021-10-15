@@ -1,4 +1,4 @@
-package com.wzqCode.obj.msg.client;
+package com.wzqCode.obj.msg.client.login;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

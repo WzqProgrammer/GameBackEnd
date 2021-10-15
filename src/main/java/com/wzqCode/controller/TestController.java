@@ -1,11 +1,9 @@
 package com.wzqCode.controller;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.wzqCode.Utils.JwtUtil;
+import com.wzqCode.utils.JwtUtil;
 import com.wzqCode.mapper.AccountMapper;
 import com.wzqCode.obj.db.Account;
-import com.wzqCode.obj.msg.client.CLoginMsg;
-import com.wzqCode.obj.msg.server.SLoginMsg;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

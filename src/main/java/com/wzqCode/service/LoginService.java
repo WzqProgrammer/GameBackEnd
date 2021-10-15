@@ -1,12 +1,12 @@
 package com.wzqCode.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wzqCode.Utils.JwtUtil;
+import com.wzqCode.utils.JwtUtil;
 import com.wzqCode.mapper.AccountMapper;
 import com.wzqCode.obj.db.Account;
 import com.wzqCode.obj.msg.HttpStatus;
-import com.wzqCode.obj.msg.server.SLoginMsg;
-import com.wzqCode.obj.msg.server.SReturnMsg;
+import com.wzqCode.obj.msg.server.login.SLoginMsg;
+import com.wzqCode.obj.msg.server.login.SReturnMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
