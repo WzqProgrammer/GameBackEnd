@@ -1,6 +1,8 @@
 package com.wzqCode.utils;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.wzqCode.exception.gameException.TokenErrorException;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtil {
@@ -8,13 +10,13 @@ public class ServletUtil {
     public static int getIdByRequest(HttpServletRequest request){
         String token = request.getHeader("token");
         if(token == null)
-            return 0;
+            throw new TokenErrorException();
 
         DecodedJWT decodedJWT;
         try{
             decodedJWT = JwtUtil.verify(token);
         }catch (Exception e){
-            return -1;
+            throw new TokenErrorException();
         }
 
         Integer id = decodedJWT.getClaim("id").asInt();

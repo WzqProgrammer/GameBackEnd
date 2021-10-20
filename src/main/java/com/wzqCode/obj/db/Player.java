@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @TableName("player")
-public class Player {
-    @TableId(type= IdType.AUTO)
-    private Integer id;
+public class Player extends BaseDBTable{
 
     // 账号id
     private Integer accountId;
@@ -26,15 +24,4 @@ public class Player {
 
     //用户关卡进度
     private int checkpoint;
-
-    //逻辑删除
-    @TableLogic(delval = "1")
-    private Integer del;
-
-    //创建时间
-    @TableField(fill = FieldFill.INSERT)
-    private String createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateTime;
 }

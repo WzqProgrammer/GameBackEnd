@@ -79,7 +79,7 @@ public class LoginService {
         }
 
         //登录账号密码均正确，生成token
-        String token = JwtUtil.createToken(accountObj.getId(), accountObj.getAccount());
+        String token = JwtUtil.createAccountToken(accountObj.getId(), accountObj.getAccount());
 
         sLoginMsg.setToken(token);
         return SReturnMsg.success(sLoginMsg);
