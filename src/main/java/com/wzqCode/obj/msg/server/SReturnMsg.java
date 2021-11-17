@@ -1,4 +1,4 @@
-package com.wzqCode.obj.msg.server.login;
+package com.wzqCode.obj.msg.server;
 
 import com.wzqCode.obj.msg.HttpStatus;
 import lombok.Data;

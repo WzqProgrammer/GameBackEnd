@@ -10,19 +10,19 @@ public class JwtUtil {
     //秘钥
     private static final String JWT_SECRET = "vcf&*sgh&ff";
 
-    private static final String ACCOUNT_ID_NAME = "id";
-    private static final String PLAYER_ID_NAME = "player_id";
+    public static final String ACCOUNT_ID_NAME = "id";
+    public static final String PLAYER_ID_NAME = "player_id";
 
-    public static String createAccountToken(int id, String account){
-        return createToken(ACCOUNT_ID_NAME, id, account);
+    public static String createAccountToken(int id){
+        return createToken(ACCOUNT_ID_NAME, id);
     }
 
-    public static String createPlayerToken(int id, String account){
-        return createToken(PLAYER_ID_NAME, id, account);
+    public static String createPlayerToken(int id){
+        return createToken(PLAYER_ID_NAME, id);
     }
 
     //根据用户id和账号名称生成token
-    private static String createToken(String idName, int id, String account){
+    private static String createToken(String idName, int id){
         //签发时间
         Calendar ins = Calendar.getInstance();
         //有效时长
@@ -33,7 +33,6 @@ public class JwtUtil {
         //token生成
         String token = JWT.create()
                 .withClaim(idName, id)
-                .withClaim("account", account)
                 .withExpiresAt(ins.getTime())   //token的失效时长
                 .sign(algorithm);
         return token;

@@ -16,7 +16,7 @@ public class BaseDBTable {
     protected Integer id;
 
     //逻辑删除
-    @TableLogic(delval = "1")
+    @TableLogic(value = "0", delval = "1")
     protected Integer del;
 
     //创建时间

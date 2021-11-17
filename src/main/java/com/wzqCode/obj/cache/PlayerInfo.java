@@ -1,0 +1,16 @@
+package com.wzqCode.obj.cache;
+
+import com.wzqCode.obj.db.Hero;
+import com.wzqCode.obj.db.Player;
+import lombok.Data;
+import java.util.List;
+
+@Data
+public class PlayerInfo {
+
+    //用户基础信息
+    private Player baseProp;
+
+    //英雄列表
+    private List<Hero> heroes;
+}

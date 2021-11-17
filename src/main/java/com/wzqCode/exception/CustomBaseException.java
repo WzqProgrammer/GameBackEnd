@@ -2,7 +2,6 @@ package com.wzqCode.exception;
 
 import lombok.Data;
 
-import java.io.InterruptedIOException;
 
 /**
  * @author 14188

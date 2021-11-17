@@ -6,7 +6,7 @@ import com.wzqCode.mapper.AccountMapper;
 import com.wzqCode.obj.db.Account;
 import com.wzqCode.obj.msg.HttpStatus;
 import com.wzqCode.obj.msg.server.login.SLoginMsg;
-import com.wzqCode.obj.msg.server.login.SReturnMsg;
+import com.wzqCode.obj.msg.server.SReturnMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -79,7 +79,7 @@ public class LoginService {
         }
 
         //登录账号密码均正确，生成token
-        String token = JwtUtil.createAccountToken(accountObj.getId(), accountObj.getAccount());
+        String token = JwtUtil.createAccountToken(accountObj.getId());
 
         sLoginMsg.setToken(token);
         return SReturnMsg.success(sLoginMsg);

@@ -17,6 +17,11 @@ public enum HttpStatus {
 
     PLAYER_CREATE_ERROR(1101, "角色信息创建错误"),
 
+    HERO_MODULE_NOT_FOUNT_ERROR(1201, "英雄模板未找到错误"),
+    HERO_CREATE_ERROR(1202, "英雄创建错误"),
+    HERO_NOT_FOUNT_ERROR(1203, "英雄未找到错误"),
+    HERO_MAX_LV_ERROR(1204, "英雄已达最大等级"),
+
     UNKNOWN_ERROR(9999, "未知错误");
 
     private Integer code;

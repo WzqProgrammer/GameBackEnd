@@ -18,4 +18,7 @@ public class SGetInfo {
 
     //用户关卡进度
     private int checkpoint;
+
+    // 基于playerId生成的新token
+    private String newToken;
 }

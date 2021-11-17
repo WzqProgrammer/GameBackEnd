@@ -1,7 +1,6 @@
 package com.wzqCode.controller;
 
-import com.wzqCode.obj.msg.HttpStatus;
-import com.wzqCode.obj.msg.server.login.SReturnMsg;
+import com.wzqCode.obj.msg.server.SReturnMsg;
 import com.wzqCode.service.PlayerService;
 import com.wzqCode.utils.ServletUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class PlayerController {
     @PostMapping("/getPlayerInfo")
     public SReturnMsg getPlayerInfo(HttpServletRequest request){
 
-       int accountId =  ServletUtil.getIdByRequest(request);
+       int accountId =  ServletUtil.getAccountIdByRequest(request);
 
        return playerService.getInfo(accountId);
     }

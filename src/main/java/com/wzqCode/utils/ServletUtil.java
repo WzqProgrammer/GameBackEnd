@@ -7,7 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtil {
 
-    public static int getIdByRequest(HttpServletRequest request){
+    public static Integer getAccountIdByRequest(HttpServletRequest request){
+        return getIdByRequest(request, JwtUtil.ACCOUNT_ID_NAME);
+    }
+
+    public static Integer getPlayerIdByRequest(HttpServletRequest request){
+        return getIdByRequest(request, JwtUtil.PLAYER_ID_NAME);
+    }
+
+
+    private static Integer getIdByRequest(HttpServletRequest request, String idName){
         String token = request.getHeader("token");
         if(token == null)
             throw new TokenErrorException();
@@ -19,7 +28,11 @@ public class ServletUtil {
             throw new TokenErrorException();
         }
 
-        Integer id = decodedJWT.getClaim("id").asInt();
+        Integer id = decodedJWT.getClaim(idName).asInt();
+        if (id == null) {
+            throw new TokenErrorException();
+        }
+
         return id;
     }
 }

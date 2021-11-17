@@ -1,10 +1,9 @@
 package com.wzqCode.config;
 
 import com.wzqCode.exception.CustomBaseException;
-import com.wzqCode.obj.msg.server.login.SReturnMsg;
+import com.wzqCode.obj.msg.server.SReturnMsg;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
