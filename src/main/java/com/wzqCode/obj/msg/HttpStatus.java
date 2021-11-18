@@ -21,6 +21,9 @@ public enum HttpStatus {
     HERO_CREATE_ERROR(1202, "英雄创建错误"),
     HERO_NOT_FOUNT_ERROR(1203, "英雄未找到错误"),
     HERO_MAX_LV_ERROR(1204, "英雄已达最大等级"),
+    HERO_MAX_STAR_ERROR(1205, "英雄已达最大星级"),
+    HERO_STAR_UP_MATERIAL_ERROR(1206, "英雄升星所需英雄材料不符合"),
+    HERO_DELETE_ERROR(1207, "英雄数据删除错误"),
 
     UNKNOWN_ERROR(9999, "未知错误");
 

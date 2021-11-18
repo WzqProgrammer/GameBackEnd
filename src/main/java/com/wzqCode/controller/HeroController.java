@@ -2,6 +2,7 @@ package com.wzqCode.controller;
 
 import com.wzqCode.obj.msg.client.hero.CCreateHeroMsg;
 import com.wzqCode.obj.msg.client.hero.CLvUpHeroMsg;
+import com.wzqCode.obj.msg.client.hero.CStarUpHeroMsg;
 import com.wzqCode.obj.msg.server.SReturnMsg;
 import com.wzqCode.service.HeroService;
 import com.wzqCode.utils.ServletUtil;
@@ -41,5 +42,13 @@ public class HeroController {
     public SReturnMsg lvUpHero(HttpServletRequest request, @RequestBody CLvUpHeroMsg cLvUpHeroMsg){
         Integer playerId = ServletUtil.getPlayerIdByRequest(request);
         return heroService.lvUpHero(playerId, cLvUpHeroMsg.getHeroId());
+    }
+
+    // 英雄升星级接口
+    @PostMapping("/starUpHero")
+    public SReturnMsg starUpHero(HttpServletRequest request, @RequestBody CStarUpHeroMsg cStarUpHeroMsg){
+        Integer playerId = ServletUtil.getPlayerIdByRequest(request);
+        return heroService.starUpHero(playerId, cStarUpHeroMsg.getHeroId(),
+                cStarUpHeroMsg.getCustomHeroId1(), cStarUpHeroMsg.getCustomHeroId2(), cStarUpHeroMsg.getCustomHeroId3());
     }
 }

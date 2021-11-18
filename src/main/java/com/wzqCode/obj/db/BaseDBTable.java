@@ -3,11 +3,6 @@ package com.wzqCode.obj.db;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
-/**
- * @author 14188
- * @date 2021/10/20 10 :23
- * @description
- */
 @Data
 public class BaseDBTable {
     // 属性的命名要与数据库中字段的命名相同（mybatis-plus会自动开启驼峰命名转下划线命名的转换）

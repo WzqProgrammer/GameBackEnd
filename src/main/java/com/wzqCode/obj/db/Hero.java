@@ -22,4 +22,14 @@ public class Hero extends BaseDBTable{
     private Integer lv;
 
     private Integer star;    //星级
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Hero){
+            Hero hero = (Hero) o;
+            return id.equals(hero.getId());
+        }
+        return false;
+    }
+
 }

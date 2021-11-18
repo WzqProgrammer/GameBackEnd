@@ -3,10 +3,7 @@ package com.wzqCode.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wzqCode.cache.PlayerCache;
 import com.wzqCode.config.gameConfig.HeroConfig;
-import com.wzqCode.exception.gameException.hero.HeroCreateErrorException;
-import com.wzqCode.exception.gameException.hero.HeroMaxLvErrorException;
-import com.wzqCode.exception.gameException.hero.HeroModuleNotFoundErrorException;
-import com.wzqCode.exception.gameException.hero.HeroNotFountErrorException;
+import com.wzqCode.exception.gameException.hero.*;
 import com.wzqCode.mapper.HeroMapper;
 import com.wzqCode.obj.cache.PlayerInfo;
 import com.wzqCode.obj.db.Hero;
@@ -97,6 +94,7 @@ public class HeroService {
             throw new HeroMaxLvErrorException();
 
         // TODO: 判断升级道具是否足够，执行道具相关逻辑
+
         // 英雄等级+1，相应属性变更
         HeroModule heroModule = heroConfig.getHeroModuleById(hero.getTypeId());
 
@@ -105,6 +103,56 @@ public class HeroService {
         hero.setDef(hero.getDef() + heroModule.getLvUpDef());
         hero.setMaxHp(hero.getMaxHp() + heroModule.getLvUpHp());
 
+        return SReturnMsg.success(hero);
+    }
+
+    // 英雄升星
+    public SReturnMsg starUpHero(Integer playerId, Integer heroId, Integer customHeroId1, Integer customHeroId2,Integer customHeroId3){
+        Hero hero = getHeroByPlayerId(playerId, heroId);
+        // 未找到对应的英雄，抛出异常
+
+        // 当前英雄已达最大星级
+        if(hero.getStar() >= heroConfig.getMaxStar())
+            throw new HeroMaxStarErrorException();
+
+        // TODO: 判断升级道具是否足够，执行道具相关逻辑
+
+        // 需要的狗粮英雄是否足够，需要一个同星级的本体英雄和两个同星级狗粮
+        Hero customHero1 = getHeroByPlayerId(playerId, customHeroId1);
+        Hero customHero2 = getHeroByPlayerId(playerId, customHeroId2);
+        Hero customHero3 = getHeroByPlayerId(playerId, customHeroId3);
+
+        // 判断英雄的星级
+        if(!customHero1.getTypeId().equals(hero.getTypeId()) || !customHero1.getStar().equals(hero.getStar()) ||
+            !customHero2.getStar().equals(hero.getStar()) || !customHero3.getStar().equals(hero.getStar()))
+            throw new HeroStarUpMaterialErrorException();
+
+        // 数据库删除消耗的材料英雄
+        try{
+            heroMapper.deleteById(customHeroId1);
+            heroMapper.deleteById(customHeroId2);
+            heroMapper.deleteById(customHeroId3);
+        }catch (Exception e){
+            throw new HeroStarUpDeleteCustomErrorException();
+        }
+
+        // 删除缓存中的相关英雄数据
+        PlayerInfo playerInfo = playerCache.getPlayerInfo(playerId);
+        List<Hero> heroList = playerInfo.getHeroes();
+
+        heroList.remove(customHero1);
+        heroList.remove(customHero2);
+        heroList.remove(customHero3);
+
+        for (Hero item : heroList) {
+            if(item.getId().equals(customHeroId1)){
+                heroList.remove(item);
+                break;
+            }
+        }
+
+        // 更新缓存数据
+        hero.setStar(hero.getStar()+1);
         return SReturnMsg.success(hero);
     }
 
@@ -118,7 +166,6 @@ public class HeroService {
             if(hero.getId().equals(heroId))
                 return hero;
         }
-        return null;
+        throw new HeroNotFountErrorException();
     }
-
 }
