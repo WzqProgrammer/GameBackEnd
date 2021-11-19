@@ -64,6 +64,14 @@ public class PlayerService {
         return SReturnMsg.success(sGetInfo);
     }
 
+    // 心跳时间处理
+    public void procHeartBeat(Integer playerId){
+        PlayerInfo playerInfo = playerCache.getPlayerInfo(playerId);
+
+        Long curTime = System.currentTimeMillis();
+        playerInfo.setLastHeartBeatTime(curTime);
+    }
+
     // 加载数据库信息到缓存
     private void initCache(Player player){
         // 加载用户基础信息到缓存
@@ -74,6 +82,10 @@ public class PlayerService {
 
         playerInfo = new PlayerInfo();
         playerInfo.setBaseProp(player);
+
+        // 初始时的心跳赋值
+        playerInfo.setLastHeartBeatTime(System.currentTimeMillis());
+
         // 加载用户英雄信息到缓存
         // 调用英雄初始化缓存，在HeroService中
         heroService.initCache(playerInfo);

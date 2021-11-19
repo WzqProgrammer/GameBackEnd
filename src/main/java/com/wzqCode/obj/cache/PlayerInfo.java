@@ -13,4 +13,7 @@ public class PlayerInfo {
 
     //英雄列表
     private List<Hero> heroes;
+
+    // 最后一次的心跳时间
+    private Long lastHeartBeatTime;
 }

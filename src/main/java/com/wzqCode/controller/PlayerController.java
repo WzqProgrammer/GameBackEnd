@@ -17,11 +17,20 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
+    // 获取用户的玩家角色信息接口
     @PostMapping("/getPlayerInfo")
     public SReturnMsg getPlayerInfo(HttpServletRequest request){
 
        int accountId =  ServletUtil.getAccountIdByRequest(request);
 
        return playerService.getInfo(accountId);
+    }
+
+    // 心跳设置接口
+    @PostMapping("/heartBeat")
+    public SReturnMsg heartBeat(HttpServletRequest request){
+        Integer playerId = ServletUtil.getPlayerIdByRequest(request);
+        playerService.procHeartBeat(playerId);
+        return SReturnMsg.success();
     }
 }

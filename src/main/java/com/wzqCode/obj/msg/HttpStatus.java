@@ -8,6 +8,7 @@ public enum HttpStatus {
     ERROR(201, "失败"),
 
     TOKEN_ERROR(202, "token错误"),
+    ID_ERROR(203, "id错误或未找到"),
 
     REGISTER_ACCOUNT_FORMAT_ERROR(1001, "账号格式错误：字母、数字、特殊符号组成，账号字数限制为5-20个字符，特殊符号仅限 @$^!~,.*"),
     REGISTER_PASSWORD_FORMAT_ERROR(1002, "密码格式错误：字母、数字、特殊符号组成，密码字数限制为8-16个字符，特殊符号仅限 @$^!~,.*"),
