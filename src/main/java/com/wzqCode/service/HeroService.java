@@ -2,6 +2,7 @@ package com.wzqCode.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wzqCode.cache.PlayerCache;
+import com.wzqCode.config.gameConfig.GlobalConfig;
 import com.wzqCode.config.gameConfig.HeroConfig;
 import com.wzqCode.exception.gameException.hero.*;
 import com.wzqCode.mapper.HeroMapper;
@@ -26,6 +27,9 @@ public class HeroService {
 
     @Autowired
     HeroConfig heroConfig;
+
+    @Autowired
+    GlobalConfig globalConfig;
 
     // 初始化缓存
     public void initCache(PlayerInfo playerInfo){
@@ -53,9 +57,9 @@ public class HeroService {
         hero.setPlayerId(playerId);
         hero.setTypeId(heroModule.getTypeId());
         hero.setHeroName(heroModule.getName());
-        hero.setAtt(heroModule.getAtt());
-        hero.setDef(heroModule.getDef());
-        hero.setMaxHp(heroModule.getHp());
+        hero.setAtt(heroModule.getInitAtt());
+        hero.setDef(heroModule.getInitDef());
+        hero.setMaxHp(heroModule.getInitHp());
         hero.setLv(1);
         hero.setStar(1);
 
@@ -88,7 +92,7 @@ public class HeroService {
         if (hero == null)
             throw new HeroNotFountErrorException();
 
-        Integer curMaxLv = hero.getStar() * heroConfig.getStarLv();
+        Integer curMaxLv = hero.getStar() * globalConfig.getIntegerValue(GlobalConfig.STAR_LV);
         // 英雄已达当前最大等级，抛出异常
         if(hero.getLv() >= curMaxLv)
             throw new HeroMaxLvErrorException();
@@ -112,7 +116,7 @@ public class HeroService {
         // 未找到对应的英雄，抛出异常
 
         // 当前英雄已达最大星级
-        if(hero.getStar() >= heroConfig.getMaxStar())
+        if(hero.getStar() >= globalConfig.getIntegerValue(GlobalConfig.MAX_STAR))
             throw new HeroMaxStarErrorException();
 
         // TODO: 判断升级道具是否足够，执行道具相关逻辑
