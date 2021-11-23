@@ -75,7 +75,7 @@ public class PlayerService {
     // 加载数据库信息到缓存
     private void initCache(Player player){
         // 加载用户基础信息到缓存
-        PlayerInfo playerInfo = playerCache.getPlayerInfo(player.getId());
+        PlayerInfo playerInfo = playerCache.getPlayerInfo(player.getId(), false);
 
         if(playerInfo != null)
             return;

@@ -1,6 +1,6 @@
 package com.wzqCode.cache;
 
-import com.wzqCode.exception.gameException.IdErrorException;
+import com.wzqCode.exception.gameException.NotLoginErrorException;
 import com.wzqCode.mapper.HeroMapper;
 import com.wzqCode.mapper.PlayerMapper;
 import com.wzqCode.obj.cache.PlayerInfo;
@@ -23,11 +23,16 @@ public class PlayerCache {
     private ConcurrentHashMap<Integer, PlayerInfo> playerInfoMap = new ConcurrentHashMap<>();
 
     public PlayerInfo getPlayerInfo(Integer playerId){
-        try{
-            return playerInfoMap.get(playerId);
-        }catch (Exception e){
-            throw new IdErrorException();
-        }
+        return getPlayerInfo(playerId, true);
+    }
+
+    public PlayerInfo getPlayerInfo(Integer playerId, boolean isThrowException){
+        PlayerInfo playerInfo = playerInfoMap.get(playerId);
+
+        if(playerInfo == null && isThrowException)
+            throw new NotLoginErrorException();
+
+        return playerInfo;
     }
 
     public ConcurrentHashMap<Integer, PlayerInfo> getPlayerInfoMap(){ return playerInfoMap; }
