@@ -5,6 +5,9 @@ import com.wzqCode.obj.db.Player;
 import lombok.Data;
 import java.util.List;
 
+/**
+ * @author 14188
+ */
 @Data
 public class PlayerInfo {
 

@@ -35,4 +35,12 @@ public class Scheduler {
             }
         }
     }
+
+    /**
+     * 保存所有用户信息到数据库
+     */
+    @Scheduled(fixedRate = 60*60*1000)
+    public void saveAll(){
+        playerCache.saveAll();
+    }
 }

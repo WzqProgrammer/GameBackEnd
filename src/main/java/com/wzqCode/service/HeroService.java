@@ -11,12 +11,14 @@ import com.wzqCode.obj.db.Hero;
 import com.wzqCode.obj.module.HeroModule;
 import com.wzqCode.obj.msg.server.hero.SGetHeroListMsg;
 import com.wzqCode.obj.msg.server.SReturnMsg;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class HeroService {
 
     @Autowired
@@ -89,13 +91,15 @@ public class HeroService {
     public SReturnMsg lvUpHero(Integer playerId, Integer heroId){
         Hero hero = getHeroByPlayerId(playerId, heroId);
         // 未找到对应的英雄，抛出异常
-        if (hero == null)
+        if (hero == null) {
             throw new HeroNotFountErrorException();
+        }
 
         Integer curMaxLv = hero.getStar() * globalConfig.getIntegerValue(GlobalConfig.STAR_LV);
         // 英雄已达当前最大等级，抛出异常
-        if(hero.getLv() >= curMaxLv)
+        if(hero.getLv() >= curMaxLv) {
             throw new HeroMaxLvErrorException();
+        }
 
         // TODO: 判断升级道具是否足够，执行道具相关逻辑
 
@@ -116,8 +120,9 @@ public class HeroService {
         // 未找到对应的英雄，抛出异常
 
         // 当前英雄已达最大星级
-        if(hero.getStar() >= globalConfig.getIntegerValue(GlobalConfig.MAX_STAR))
+        if(hero.getStar() >= globalConfig.getIntegerValue(GlobalConfig.MAX_STAR)) {
             throw new HeroMaxStarErrorException();
+        }
 
         // TODO: 判断升级道具是否足够，执行道具相关逻辑
 
@@ -128,8 +133,9 @@ public class HeroService {
 
         // 判断英雄的星级
         if(!customHero1.getTypeId().equals(hero.getTypeId()) || !customHero1.getStar().equals(hero.getStar()) ||
-            !customHero2.getStar().equals(hero.getStar()) || !customHero3.getStar().equals(hero.getStar()))
+            !customHero2.getStar().equals(hero.getStar()) || !customHero3.getStar().equals(hero.getStar())) {
             throw new HeroStarUpMaterialErrorException();
+        }
 
         // 数据库删除消耗的材料英雄
         try{
@@ -137,6 +143,9 @@ public class HeroService {
             heroMapper.deleteById(customHeroId2);
             heroMapper.deleteById(customHeroId3);
         }catch (Exception e){
+            log.error("star up delete error: playerId="+playerId +
+                    " heroId=" + heroId+ " customHeroId1=" + customHeroId1 +
+                    "customHeroId2" + customHeroId2 + "customHeroId3" + customHeroId3);
             throw new HeroStarUpDeleteCustomErrorException();
         }
 
@@ -167,9 +176,11 @@ public class HeroService {
         List<Hero> heroes = playerInfo.getHeroes();
         // 根据英雄id获取需要升级的英雄
         for (Hero hero : heroes) {
-            if(hero.getId().equals(heroId))
+            if(hero.getId().equals(heroId)) {
                 return hero;
+            }
         }
+        log.error("hero not found error: playerId="+playerId);
         throw new HeroNotFountErrorException();
     }
 }

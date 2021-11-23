@@ -77,8 +77,9 @@ public class PlayerService {
         // 加载用户基础信息到缓存
         PlayerInfo playerInfo = playerCache.getPlayerInfo(player.getId(), false);
 
-        if(playerInfo != null)
+        if(playerInfo != null) {
             return;
+        }
 
         playerInfo = new PlayerInfo();
         playerInfo.setBaseProp(player);

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author 14188
+ */
 @Component
 public class PlayerCache {
 
@@ -29,8 +32,9 @@ public class PlayerCache {
     public PlayerInfo getPlayerInfo(Integer playerId, boolean isThrowException){
         PlayerInfo playerInfo = playerInfoMap.get(playerId);
 
-        if(playerInfo == null && isThrowException)
+        if(playerInfo == null && isThrowException) {
             throw new NotLoginErrorException();
+        }
 
         return playerInfo;
     }
@@ -56,5 +60,8 @@ public class PlayerCache {
 
     //将所有用户数据保存到数据库中
     public void saveAll(){
+        for (PlayerInfo playerInfo : playerInfoMap.values()){
+            saveOne(playerInfo);
+        }
     }
 }

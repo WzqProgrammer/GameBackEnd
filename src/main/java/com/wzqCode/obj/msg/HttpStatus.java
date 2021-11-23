@@ -2,6 +2,10 @@ package com.wzqCode.obj.msg;
 
 import lombok.Getter;
 
+/**
+ * @author 14188
+ */
+
 @Getter
 public enum HttpStatus {
     SUCCESS(200, "成功"),
