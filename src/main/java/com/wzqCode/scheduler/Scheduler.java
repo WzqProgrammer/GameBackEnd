@@ -15,12 +15,12 @@ public class Scheduler {
     PlayerCache playerCache;
 
     // 2分钟没有收到心跳就认为用户掉线或登出
-//    private final Integer LOGIN_OUT_TIME = 2*60*1000;
-    private final Integer LOGIN_OUT_TIME = 20*1000;  //测试数据
+    private final Integer LOGIN_OUT_TIME = 2*60*1000;
+//    private final Integer LOGIN_OUT_TIME = 20*1000;  //测试数据
 
     // 定时检测用户心跳 5分钟
-//    @Scheduled(fixedRate = 5*60*1000)
-    @Scheduled(fixedRate = 30*1000)
+    @Scheduled(fixedRate = 5*60*1000)
+//    @Scheduled(fixedRate = 30*1000)
     public void heartBeatTask(){
         long curTime = System.currentTimeMillis();
         ConcurrentHashMap<Integer, PlayerInfo> playerInfoMap = playerCache.getPlayerInfoMap();

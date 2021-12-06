@@ -90,10 +90,6 @@ public class HeroService {
     // 英雄升级
     public SReturnMsg lvUpHero(Integer playerId, Integer heroId){
         Hero hero = getHeroByPlayerId(playerId, heroId);
-        // 未找到对应的英雄，抛出异常
-        if (hero == null) {
-            throw new HeroNotFountErrorException();
-        }
 
         Integer curMaxLv = hero.getStar() * globalConfig.getIntegerValue(GlobalConfig.STAR_LV);
         // 英雄已达当前最大等级，抛出异常

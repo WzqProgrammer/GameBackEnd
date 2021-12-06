@@ -31,6 +31,7 @@ public enum HttpStatus {
     HERO_DELETE_ERROR(1207, "英雄数据删除错误"),
 
     TAVERN_FORMAT_ERROR(1301, "酒馆日期解析错误"),
+    TAVERN_FREE_LOTTERY_TIME_ERROR(1302, "未到免费抽奖时间"),
 
     UNKNOWN_ERROR(9999, "未知错误");
 

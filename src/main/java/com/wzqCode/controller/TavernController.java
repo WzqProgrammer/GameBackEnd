@@ -21,4 +21,11 @@ public class TavernController {
         Integer playerId = ServletUtil.getPlayerIdByRequest(request);
         return tavernService.getTavernInfo(playerId);
     }
+
+    // 免费单抽
+    @PostMapping("/freeLottery")
+    public SReturnMsg freeLottery(HttpServletRequest request){
+        Integer playerId = ServletUtil.getPlayerIdByRequest(request);
+        return tavernService.freeLottery(playerId);
+    }
 }

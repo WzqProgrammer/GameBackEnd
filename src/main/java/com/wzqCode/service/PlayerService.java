@@ -8,9 +8,13 @@ import com.wzqCode.obj.db.Player;
 import com.wzqCode.obj.msg.HttpStatus;
 import com.wzqCode.obj.msg.server.SReturnMsg;
 import com.wzqCode.obj.msg.server.player.SGetInfo;
+import com.wzqCode.utils.DataUtil;
 import com.wzqCode.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class PlayerService {
@@ -39,6 +43,11 @@ public class PlayerService {
             player.setCoin(100);
             player.setCheckpoint(1);
             player.setAccountId(accountId);
+            // 新创建的用户直接有一次免费抽奖的机会
+            // 设置免费抽奖时间
+            SimpleDateFormat df = new SimpleDateFormat(DataUtil.YYYY_MM_DD_HH_MM_SS);
+            String initTime = df.format(0);
+            player.setLastFreeLotteryTime(initTime);
 
             try {
                 playerMapper.insert(player);
