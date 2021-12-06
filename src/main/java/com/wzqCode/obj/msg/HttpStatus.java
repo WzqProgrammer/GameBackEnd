@@ -30,6 +30,8 @@ public enum HttpStatus {
     HERO_STAR_UP_MATERIAL_ERROR(1206, "英雄升星所需英雄材料不符合"),
     HERO_DELETE_ERROR(1207, "英雄数据删除错误"),
 
+    TAVERN_FORMAT_ERROR(1301, "酒馆日期解析错误"),
+
     UNKNOWN_ERROR(9999, "未知错误");
 
     private Integer code;

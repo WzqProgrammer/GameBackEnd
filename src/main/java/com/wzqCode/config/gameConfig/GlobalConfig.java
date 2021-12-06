@@ -20,6 +20,10 @@ public class GlobalConfig implements CommandLineRunner {
 
     public static final String STAR_LV = "star_lv";
     public static final String MAX_STAR = "max_star";
+    public static final String ONE_LOTTERY_COIN = "one_lottery_coin";
+    public static final String TEN_LOTTERY_COIN = "ten_lottery_coin";
+    public static final String FREE_LOTTERY_TIME = "free_lottery_time";
+
 
     public String getStringValue(String key){
         return globalDataMap.get(key);

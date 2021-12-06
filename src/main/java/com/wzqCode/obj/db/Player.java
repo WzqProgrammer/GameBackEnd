@@ -24,4 +24,7 @@ public class Player extends BaseDBTable{
 
     //用户关卡进度
     private int checkpoint;
+
+    // 用户上次免费抽奖的时间
+    private String lastFreeLotteryTime;
 }

@@ -16,4 +16,5 @@ public class HeroModule {
     private Integer lvUpAtt;
     private Integer lvUpDef;
     private Integer lvUpHp;
+    private Integer lotteryWeight;
 }
